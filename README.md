@@ -6,7 +6,7 @@ The module contains the following functions:
 - read_history
 - UnpackGridData
 
-:: Astrnomy functions
+:: Astronomy functions
 - roche_lobe
 - seperation_to_period
 - period_to_separation
