@@ -2,7 +2,7 @@
 """
 Created on Tue Jan 10 10:24:47 2017
 
-@author: MS
+@author: Mads Sørensen
 """
 
 # module binary
@@ -108,7 +108,7 @@ def normed_two_part_power_law(xlow,xup,xbreak,slope1,slope2,x):
         return f
 
 
-def radioactive_decay(N, N0, t, thalf,case):
+def radio_active_decay(N, N0, t, thalf,case):
     if case == 'forward':
         N = N0*numpy.exp(-t/thalf)
         return N
