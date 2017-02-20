@@ -5,12 +5,54 @@ Created on Tue Jan 10 10:24:47 2017
 @author: Mads Sørensen
 """
 
-# module binary
+import os
 import numpy
 import math
 import astropy
 from astropy import units as u
 from astropy import constants as const
+
+def load_history(path):
+    # Loads a MESA history file given path.
+    # Returned is a array with named columns.
+
+    #check  if last letter of path is /
+    if path[-1] == '/':
+        data = numpy.genfromtxt(path+'LOGS/history.data', skip_header=5, names=True)
+    else:
+        data = numpy.genfromtxt(path+'/LOGS/history.data', skip_header=5, names=True)
+    return data
+
+def get_model_name(n):
+    # Supports function: unpack_grid_data
+    model = 'BF' #Short for Binary Grid
+    model_name = model+str('%08.0f'%(n))
+    return model_name
+
+def UnpackGridData(n, path_data):
+    # Loads npz files made with MESA.
+    model_name = get_model_name(n)
+    datafile = path_data+model_name+'.npz'
+    if os.path.isfile(datafile):
+        data = numpy.load(datafile)
+        if numpy.size(data.files) == 3:
+            dB = data['B']
+            dS1= data['S1']
+            dS2= data['S2']
+            flag = 0
+            return dB,dS1,dS2
+        else:
+            dB = data['B']
+            dS1= [1]
+            dS2= [1]
+            flag = 1
+            return dB,dS1,dS2
+    else:
+        dB = [1]
+        dS1= [2]
+        dS2= [3]
+        flag = 2
+        return dB,dS1,dS2,flag
 
 #Adopted from Tassos Frakos
 def roche_lobe(m1, m2):
@@ -108,7 +150,7 @@ def normed_two_part_power_law(xlow,xup,xbreak,slope1,slope2,x):
         return f
 
 
-def radio_active_decay(N, N0, t, thalf,case):
+def radioactive_decay(N, N0, t, thalf,case):
     if case == 'forward':
         N = N0*numpy.exp(-t/thalf)
         return N
@@ -133,4 +175,4 @@ def radio_active_fluence(t,r,U,Mej,A,mp,thalf):
     return F
 
 if __name__ == "__main__":
-    print 'Module astro_fun.py initiated.'
+    print 'Module AstroFun.py loaded.'
