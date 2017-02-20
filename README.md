@@ -1,6 +1,12 @@
 # astro_fun
 Python module with relevant astrophysical and astrostatistic functions.
 The module contains the following functions:
+
+:: MESA 
+- read_history
+- UnpackGridData
+
+:: Astrnomy functions
 - roche_lobe
 - seperation_to_period
 - period_to_separation
