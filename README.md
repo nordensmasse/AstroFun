@@ -1,4 +1,4 @@
-# astro_fun
+# astrofun
 Python module with relevant astrophysical and astrostatistic functions.
 The module contains the following functions:
 
