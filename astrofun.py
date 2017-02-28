@@ -13,7 +13,7 @@ from astropy import units as u
 from astropy import constants as const
 
 #BSE functions
-def load_data(fname):
+def load_BSE_data(fname):
     #Load in a BSE data output file.
     data = numpy.genfromtxt(fname, names=True)
     return data
