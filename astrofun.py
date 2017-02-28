@@ -12,6 +12,14 @@ import astropy
 from astropy import units as u
 from astropy import constants as const
 
+#BSE functions
+def load_data(fname):
+    #Load in a BSE data output file.
+    data = numpy.genfromtxt(fname, names=True)
+    return data
+
+#MESA functions
+
 def load_history(path):
     # Loads a MESA history file given path.
     # Returned is a array with named columns.
@@ -53,6 +61,8 @@ def UnpackGridData(n, path_data):
         dS2= [3]
         flag = 2
         return dB,dS1,dS2,flag
+    
+#Binary systems functions.
 
 #Adopted from Tassos Frakos
 def roche_lobe(m1, m2):
@@ -93,7 +103,7 @@ def period_to_separation(period, m1, m2):
     separation = (period**2 * const.G * mbin / (4.0 * math.pi**2)) ** (1.0 / 3.0)
     return separation.to('Rsun')
 
-
+#Statistical function
 def inv_one_part_power_law(x, xlow,xup,a1):
     #normalise
     kN1 = 1./(1.+a1)*(xup**(1.-a1)-xlow**(1.+a1))
@@ -150,6 +160,7 @@ def normed_two_part_power_law(xlow,xup,xbreak,slope1,slope2,x):
         return f
 
 
+#Miscallaneous functions
 def radioactive_decay(N, N0, t, thalf,case):
     if case == 'forward':
         N = N0*numpy.exp(-t/thalf)
